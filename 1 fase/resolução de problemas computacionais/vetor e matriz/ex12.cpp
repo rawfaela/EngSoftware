@@ -4,13 +4,11 @@ pares em um vetor B. Construir um vetor I, sendo este a intersecção dos vetore
 deve ter a capacidade de armazenar no máximo 5 elementos. */
 //intersecção = iguais nos dois
 
-// NAO TERMINEI
-
 #include<stdio.h>
 
 main()
 {
-	int A[5], B[10], I[5], num = 1;
+	int A[5], B[10], I[5], num = 1, contI = 0, tamanho = 0;
 	
 	for (int i = 0; i < 5; i++)
 	{
@@ -38,23 +36,20 @@ main()
 		}	
 	}
 	
-	for (int i = 0; i < 5; i++) //I
+
+	for (int x = 0; x < 10; x++) //B
 	{
-		for (int x = 0; x < 10; x++) //B
+		for (int y = 0; y < 5; y++) //A
 		{
-			for (int y = 0; y < 5; y++) //A
+			if (B[x] == A[y])
 			{
-				if (B[x] == A[y])
-				{
-					printf("\nA[y]: %i",A[y]); //pra teste
-					I[i] = A[y];
-					break;
-				}
+				I[contI] = A[y];
+				contI++;
 			}
 		}
 	}
 	
-	for (int i = 0; i < 5; i++)
+	for (int i = 0; i < contI; i++)
 	{
 		printf("\nI[%i]: %i",i,I[i]);
 	}	
