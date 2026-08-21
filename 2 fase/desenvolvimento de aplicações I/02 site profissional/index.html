@@ -25,18 +25,18 @@
             <img src="" alt="Ilustração do texto">
             <p>Lorem ipsum dolor sit amet</p>
         </article>
-        
+
         <article>
             <h4>Assunto</h4>
             <img src="" alt="Ilustração do texto">
             <p>Lorem ipsum dolor sit amet</p>
             <section>
                 <h5>Relevâncias</h5>
-                <ul> <!-- se for ordenado em numero é ol -->
+                <ol> <!-- se for ordenado em numero é ol, sem ordenação (bolinha) ul -->
                     <li>Info A</li>
                     <li>Info B</li>
                     <li>Info C</li>
-                </ul>
+                </ol>
             </section>
 
             <section>
@@ -44,6 +44,23 @@
                 <img src="" alt="Ilustração do texto">
             </section>
         </article>
+        
+        <h3>Formulário</h3>
+        <form action="/action_page.php">
+            <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike">
+            <label for="vehicle1"> I have a bike</label><br>
+
+            <input type="checkbox" id="vehicle2" name="vehicle2" value="Car">
+            <label for="vehicle2"> I have a car</label><br>
+
+            <input type="checkbox" id="vehicle3" name="vehicle3" value="Boat">
+            <label for="vehicle3"> I have a boat</label><br>
+
+            <input type="checkbox" id="vehicle4" name="vehicle4" value="Skate" checked="true">
+            <label for="vehicle4"> I have a skateboard</label><br><br>
+
+            <input type="submit" value="Submit">
+        </form>
     </main>
 
     <footer>
