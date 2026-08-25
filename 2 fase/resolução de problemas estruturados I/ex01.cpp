@@ -1,26 +1,32 @@
-#include<stdio.h>
+#include <stdio.h>
+#include <locale.h>
 
-main()
+//inverter o conteudo do penultimo com o antepenultimo
+
+int main()
 {
-	int posicoes, i, aux;
-	printf("Informe quantas posicoes no vetor: ");
-	scanf("%i",&posicoes);
+	setlocale(LC_ALL,"Portuguese");
 	
-	int A[posicoes];
+	int tamanhoVetor, aux;
 	
+	printf("Digite o tamanho do vetor: ");
+	scanf("%i",&tamanhoVetor);
+	
+	int A[tamanhoVetor];
+
 	printf("Vetor A\n");
-	for (i = 0; i<posicoes; i++)
+	for (int i = 0; i < tamanhoVetor; i++)
 	{
-		printf("Informe um numero: ");
+		printf("Digite um número para adicionar ao vetor: ");
 		scanf("%i",&A[i]);
 	}
 	
-	aux = A[posicoes - 3];
-	A[posicoes - 3] = A[posicoes - 2];
-	A[posicoes - 2] = aux;
+	aux = A[tamanhoVetor - 3];
+	A[tamanhoVetor - 3] = A[tamanhoVetor - 2];
+	A[tamanhoVetor - 2] = aux;
 	
-	for (i=0;i<posicoes;i++)
+	for (int i = 0; i < tamanhoVetor; i++)
 	{
-		printf("%i\t",A[i]);
+		printf("A[%i]: %i\n",i,A[i]);
 	}
 }
