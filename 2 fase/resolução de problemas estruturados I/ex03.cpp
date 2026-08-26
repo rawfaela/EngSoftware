@@ -7,7 +7,6 @@ int main()
 {
 	setlocale(LC_ALL,"Portuguese");
 	int A[5], maior = 0, cont = 5, posicao;
-	bool parar = 0;
 
 	for (int i = 0; i < 5; i++)
 	{
@@ -15,7 +14,7 @@ int main()
 		scanf("%i",&A[i]);
 	}
 	
-	while(!parar)
+	while(cont!=0)
 	{
 		maior = 0;
 		for (int i = 0; i < cont; i++)
@@ -29,11 +28,6 @@ int main()
 		cont--;
 		A[posicao] = A[cont];
 		A[cont] = maior;
-		
-		if (cont == 0)
-		{
-			parar = 1;
-		}
 	}
 	
 	
