@@ -19,24 +19,27 @@ O programa deverá mostrar um menu de opções:
 	2.6 - Retornar ao menu anterior.
 */
 
+//!! se gera relatorio e dps add pessoa nova nao funciona !!!!!!!!!!!!!!!!!
+
 #include <stdio.h>
 #include <locale.h>
 #include <ctype.h>
 
-struct Funcionario //aprendi no curso tecnico
+typedef struct Funcionario //aprendi no curso tecnico
 {
 	char nome[50], setor[50], sexo;
 	int idade;
 	float tempo, salario;
-};
+} FUNCIONARIO;
 
 int main()
 {
 	setlocale(LC_ALL,"Portuguese");
 	
-	Funcionario funcionarios[10], maiorFunc;
+	FUNCIONARIO funcionarios[10], maiorFunc, funcsF[10], funcsM[10];
 	
-	int op, opR, contM, contF, qtd = 0, maior, menor, maiorSal, posSal, contPos;
+	int op, opR, contM, contF, qtd = 0, maior, menor, posAux, contPos;
+	float maiorAux;
 	
 	for (int i = 0; i<10; i++)
 	{
@@ -131,18 +134,18 @@ int main()
 							contPos = 1;
 							while (contPos != 0)
 							{
-								maiorSal = 0;
+								maiorAux = 0;
 								for (int contPos = 0; contPos < qtd; contPos++)
 								{
-									if (funcionarios[contPos].salario > maiorSal)
+									if (funcionarios[contPos].salario > maiorAux)
 									{
-										maiorSal = funcionarios[contPos].salario;
+										maiorAux = funcionarios[contPos].salario;
 										maiorFunc = funcionarios[contPos];
-										posSal = contPos;
+										posAux = contPos;
 									}
 								}
 								contPos--;
-								funcionarios[posSal] = funcionarios[contPos];
+								funcionarios[posAux] = funcionarios[contPos];
 								funcionarios[contPos] = maiorFunc;
 							}
 							
@@ -155,23 +158,50 @@ int main()
 						
 						case 5:
 							contPos = 1;
-							/* while (contPos != 0)
+							while (contPos != 0)
 							{
-								maiorSal = 0;
+								maiorAux = 0;
 								for (int contPos = 0; contPos < qtd; contPos++)
 								{
-									if (funcionarios[contPos].salario > maiorSal)
+									if (funcionarios[contPos].idade > maiorAux)
 									{
-										maiorSal = funcionarios[contPos].salario;
+										maiorAux = funcionarios[contPos].idade;
 										maiorFunc = funcionarios[contPos];
-										posSal = contPos;
+										posAux = contPos;
 									}
 								}
 								contPos--;
-								funcionarios[posSal] = funcionarios[contPos];
+								funcionarios[posAux] = funcionarios[contPos];
 								funcionarios[contPos] = maiorFunc;
-							} */
-							printf("\nFuncionários por sexo em ordem decrescente de idade:\n")
+							}
+
+							contF = 0;
+							contM = 0;
+							for (int x = 0; x < qtd; x++)
+							{
+								if (funcionarios[x].sexo == 'F')
+								{
+									funcsF[contF] = funcionarios[x];
+									contF++;
+								}
+								else
+								{
+									funcsM[contM] = funcionarios[x];
+									contM++;
+								}
+							}
+
+							printf("\nFuncionários por sexo em ordem decrescente de idade:\n");
+							printf("Sexo feminino:\n");
+							for (int x = 0; x < contF; x++)
+							{
+								printf("%iº: %s, %i anos\n",(x+1), funcsF[x].nome, funcsF[x].idade);
+							}
+							printf("Sexo masculino:\n");
+							for (int x = 0; x < contM; x++)
+							{
+								printf("%iº: %s, %i anos\n",(x+1), funcsM[x].nome, funcsM[x].idade);
+							}
 						break;
 						
 						case 6:
