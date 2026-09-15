@@ -19,11 +19,10 @@ O programa deverá mostrar um menu de opções:
 	2.6 - Retornar ao menu anterior.
 */
 
-//!! se gera relatorio e dps add pessoa nova nao funciona !!!!!!!!!!!!!!!!!
-
 #include <stdio.h>
 #include <locale.h>
 #include <ctype.h>
+#include <string.h>
 
 typedef struct Funcionario //aprendi no curso tecnico
 {
@@ -32,16 +31,23 @@ typedef struct Funcionario //aprendi no curso tecnico
 	float tempo, salario;
 } FUNCIONARIO;
 
+typedef struct Setores
+{
+	char nome[50];
+	int qtd, somaIdade;
+} SETORES;
+
 int main()
 {
 	setlocale(LC_ALL,"Portuguese");
 	
 	FUNCIONARIO funcionarios[10], maiorFunc, funcsF[10], funcsM[10];
-	
-	int op, opR, contM, contF, qtd = 0, maior, menor, posAux, contPos;
+	SETORES setores[10];
+	int op = 1, opR, contM, contF, qtd = 0, maior, menor, posAux, contPos, qtdSetores;
 	float maiorAux;
-	
-	for (int i = 0; i<10; i++)
+	bool encontrou;
+
+	while(op!=0)
 	{
 		printf("\n==== MENU ====\n");
 		printf("0- Sair\n1- Informar dados dos funcionários\n2- Relatórios\nDigite sua opção: ");
@@ -51,37 +57,43 @@ int main()
 		{
 			case 0:
 				printf("\nSaindo!\n");
-				break;
 			break;
 			
 			case 1:
-				printf("Digite o nome do funcionário: ");
-				scanf(" %[^\n]", funcionarios[i].nome);
-				
-				printf("Digite a idade do funcionário: ");
-				scanf("%i",&funcionarios[i].idade);
-				
-				printf("Digite o tempo de empresa do funcionário: ");
-				scanf("%f",&funcionarios[i].tempo);
-				
-				do 
+				if (qtd >= 10)
 				{
-					printf("Digite o sexo do funcionário (M/F): ");
-					scanf(" %c",&funcionarios[i].sexo);
-					funcionarios[i].sexo = toupper(funcionarios[i].sexo);
-					if (funcionarios[i].sexo != 'M' && funcionarios[i].sexo != 'F')
+					printf("Limite de funcionários atingido!\n");
+				}
+				else
+				{
+					printf("Digite o nome do funcionário: ");
+					scanf(" %[^\n]", funcionarios[qtd].nome);
+					
+					printf("Digite a idade do funcionário: ");
+					scanf("%i",&funcionarios[qtd].idade);
+					
+					printf("Digite o tempo de empresa do funcionário: ");
+					scanf("%f",&funcionarios[qtd].tempo);
+					
+					do 
 					{
-						printf("Sexo inválido.\n");
-					}
-				} while (funcionarios[i].sexo != 'M' && funcionarios[i].sexo != 'F');
-				
-				printf("Digite o setor do funcionário: ");
-				scanf(" %[^\n]", funcionarios[i].setor);
-				
-				printf("Digite o salário do funcionário: ");
-				scanf("%f",&funcionarios[i].salario);
-				
-				qtd++;
+						printf("Digite o sexo do funcionário (M/F): ");
+						scanf(" %c",&funcionarios[qtd].sexo);
+						funcionarios[qtd].sexo = toupper(funcionarios[qtd].sexo);
+						if (funcionarios[qtd].sexo != 'M' && funcionarios[qtd].sexo != 'F')
+						{
+							printf("Sexo inválido.\n");
+						}
+					} while (funcionarios[qtd].sexo != 'M' && funcionarios[qtd].sexo != 'F');
+					
+					printf("Digite o setor do funcionário: ");
+					scanf(" %[^\n]", funcionarios[qtd].setor);
+					
+					printf("Digite o salário do funcionário: ");
+					scanf("%f",&funcionarios[qtd].salario);
+					
+					qtd++;
+				}
 			break;
 			
 			case 2:
@@ -95,6 +107,11 @@ int main()
 					switch (opR)
 					{
 						case 1:
+							if (qtd == 0)
+							{
+								printf("Nenhum funcionário cadastrado!\n");
+								break;
+							}
 							contM = 0;
 							contF = 0;
 							for (int x = 0; x < qtd; x++)
@@ -105,10 +122,16 @@ int main()
 								}
 								else contF +=1;
 							}
-							printf("\nFuncionários do sexo masculino: %i\nFuncionários do sexo feminino: %i\n", contM, contF);
+							printf("\nQuantidade de funcionários por sexo:\n");
+							printf("Funcionários do sexo masculino: %i\nFuncionários do sexo feminino: %i\n", contM, contF);
 						break;
 						
 						case 2:
+							if (qtd == 0)
+							{
+								printf("Nenhum funcionário cadastrado!\n");
+								break;
+							}
 							maior = 0;
 						    menor = 0;
 						    for (int x = 1; x < qtd; x++)
@@ -127,26 +150,72 @@ int main()
 						break;
 						
 						case 3:
-							
+							if (qtd == 0)
+							{
+								printf("Nenhum funcionário cadastrado!\n");
+								break;
+							}
+							qtdSetores = 0;
+
+							for (int x = 0; x < 10; x++)
+							{
+								setores[x].qtd = 0;
+								setores[x].somaIdade = 0;
+							}
+
+							for (int x = 0; x < qtd; x++)
+							{
+								encontrou = 0;
+								for (int y = 0; y < qtdSetores; y++)
+								{
+									if (strcmp(funcionarios[x].setor, setores[y].nome) == 0)
+									{
+										setores[y].qtd++;
+										setores[y].somaIdade += funcionarios[x].idade;
+										encontrou = 1;
+										break;
+									}
+								}
+
+								if (!encontrou)
+								{
+									strcpy(setores[qtdSetores].nome, funcionarios[x].setor);
+									setores[qtdSetores].qtd = 1;
+									setores[qtdSetores].somaIdade = funcionarios[x].idade;
+									qtdSetores++;
+								}
+							}
+
+							printf("\nMédia de idade por setor:\n");
+							for (int x = 0; x < qtdSetores; x++)
+							{
+								printf("\nSetor %s: %.2f anos", setores[x].nome, (float)setores[x].somaIdade / setores[x].qtd);
+							}
+
 						break;
 						
 						case 4:
-							contPos = 1;
-							while (contPos != 0)
+							if (qtd == 0)
+							{
+								printf("Nenhum funcionário cadastrado!\n");
+								break;
+							}
+							contPos = qtd-1;
+							while (contPos >= 0)
 							{
 								maiorAux = 0;
-								for (int contPos = 0; contPos < qtd; contPos++)
+								for (int x = 0; x <= contPos; x++)
 								{
-									if (funcionarios[contPos].salario > maiorAux)
+									if (funcionarios[x].salario > maiorAux)
 									{
-										maiorAux = funcionarios[contPos].salario;
-										maiorFunc = funcionarios[contPos];
-										posAux = contPos;
+										maiorAux = funcionarios[x].salario;
+										maiorFunc = funcionarios[x];
+										posAux = x;
 									}
 								}
-								contPos--;
 								funcionarios[posAux] = funcionarios[contPos];
 								funcionarios[contPos] = maiorFunc;
+								contPos--;
 							}
 							
 							printf("\nFuncionários por ordem crescente de salário:\n");
@@ -157,22 +226,27 @@ int main()
 						break;
 						
 						case 5:
-							contPos = 1;
-							while (contPos != 0)
+							if (qtd == 0)
+							{
+								printf("Nenhum funcionário cadastrado!\n");
+								break;
+							}
+							contPos = qtd-1;
+							while (contPos >= 0)
 							{
 								maiorAux = 0;
-								for (int contPos = 0; contPos < qtd; contPos++)
+								for (int x = 0; x <= contPos; x++)
 								{
-									if (funcionarios[contPos].idade > maiorAux)
+									if (funcionarios[x].idade > maiorAux)
 									{
-										maiorAux = funcionarios[contPos].idade;
-										maiorFunc = funcionarios[contPos];
-										posAux = contPos;
+										maiorAux = funcionarios[x].idade;
+										maiorFunc = funcionarios[x];
+										posAux = x;
 									}
 								}
-								contPos--;
 								funcionarios[posAux] = funcionarios[contPos];
 								funcionarios[contPos] = maiorFunc;
+								contPos--;
 							}
 
 							contF = 0;
@@ -218,9 +292,6 @@ int main()
 			default:
 				printf("Opção inválida!\n");
 			break;
-		}
-		
-		if (op==0) break;
+		}		
 	}
-	
 }
