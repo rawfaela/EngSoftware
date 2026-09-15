@@ -146,7 +146,8 @@ int main()
 						            menor = x;
 						        }
 						    }
-						    printf("\nFuncionário mais novo: %s\nFuncionário mais velho: %s\n", funcionarios[menor].nome, funcionarios[maior].nome);
+						    printf("\nFuncionário mais novo e mais velho:\n");
+						    printf("Funcionário mais novo: %s\nFuncionário mais velho: %s\n", funcionarios[menor].nome, funcionarios[maior].nome);
 						break;
 						
 						case 3:
@@ -189,7 +190,7 @@ int main()
 							printf("\nMédia de idade por setor:\n");
 							for (int x = 0; x < qtdSetores; x++)
 							{
-								printf("\nSetor %s: %.2f anos", setores[x].nome, (float)setores[x].somaIdade / setores[x].qtd);
+								printf("Setor %s: %.2f anos\n", setores[x].nome, (float)setores[x].somaIdade / setores[x].qtd);
 							}
 
 						break;
@@ -267,12 +268,12 @@ int main()
 
 							printf("\nFuncionários por sexo em ordem decrescente de idade:\n");
 							printf("Sexo feminino:\n");
-							for (int x = 0; x < contF; x++)
+							for (int x = (contF - 1); x >= 0; x--)
 							{
 								printf("%iº: %s, %i anos\n",(x+1), funcsF[x].nome, funcsF[x].idade);
 							}
 							printf("Sexo masculino:\n");
-							for (int x = 0; x < contM; x++)
+							for (int x = (contM - 1); x >= 0; x--)
 							{
 								printf("%iº: %s, %i anos\n",(x+1), funcsM[x].nome, funcsM[x].idade);
 							}
