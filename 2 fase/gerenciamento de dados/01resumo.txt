@@ -1,0 +1,27 @@
+Dados: fatos brutos, em sua forma primária, muitas vezes não fazem sentido sozinhos.
+Informações: agrupamento de dados de forma organizada para fazer sentido, gerar conhecimento.
+Metadados: dado relativo a outro dado -> sem eles não seria possível organizar e extrair infos de um banco de dados.
+Persistência de dados: armazenar, manipular e recuperar dados. Por: arqs de texto, arqs tipados, banco de dados.
+Banco de dados: coleção de dados inter-relacionados, representando infos sobre um domínio espcífico. Maior disponibilidade, menos redundância, precisão, programa e arquivo de consistência (padrões), fácil acesso e manipulação, maior segurança.
+
+*Modelos de Bancos*
+Hierárquico: dados estruturados em hierarquias/árvores, cada nó tem ocorrências de registros, cada registro é uma coleção de campos, cada um com só uma info.
+            Registro filho só tem um registro pai, ligações entre crianças não são permitidas. Pra alterar precisa refazer.
+
+em Rede: hierárquico, permite mais ligações (teia de aranha, rede interligada). Pra alterar precisa refazer.
+
+Relacional: tabela constituída por 1+ campos que indica o tipo de dado. Desvantagem: busca de dados pode demorar mais.
+            Relação (tabela): estrutura fundamental, bidimensional, tem um esquema.
+            Esquema da relação: tem 1+ atributos, cada instância de esquema de relação é uma tupla/registro.
+            Esquema relacional: conjunto de esquemas de uma database.
+            Atributo: reduz tipo de dado a armazenar, designado um domínio pra cada.
+            Domínio de atributo: gama de valores possíveis que atributo pode tomar.
+            Grau da relação: nº atributos da relação.
+            Cardinalidade da relação: nº tuplas/registros da relação.
+
+Orientado a Objetos: armazena infos como objs estruturados, sem tabelas. Desvantagens: +caro, organizações relutantes em mudar p/ ele (do relacional).
+
+Modelo Entidade Relacionamento: mod conceitual p/ descrever objs envolvidos em um domínio de negócios, com seus atributos e relacionamentos.
+Diagrama Entidade Relacionamento: rep gráfica do MER.
+
+SQL (Structured Query Lang): interagir com SGBD e executar tarefas (CRUD).
