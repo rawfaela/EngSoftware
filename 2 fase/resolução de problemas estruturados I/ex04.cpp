@@ -24,7 +24,7 @@ O programa deverá mostrar um menu de opções:
 #include <ctype.h>
 #include <string.h>
 
-typedef struct Funcionario //aprendi no curso tecnico
+typedef struct Funcionario
 {
 	char nome[50], setor[50], sexo;
 	int idade;
